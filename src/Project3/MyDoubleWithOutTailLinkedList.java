@@ -75,6 +75,7 @@ if(s instanceof Game) {
 	/** Case1: s is a Game, and s goes on top- list exists (older dates on bottom)*/
 	if (top.getData().getDueBack().after(s.dueBack)) {
 		top = new DNode(s, top, null);
+		top.getNext().setPrev(top);
 		return;
 	}
 
@@ -85,11 +86,9 @@ if(s instanceof Game) {
 	}
 
 	/**Case3: s goes to end of list WILL THE "OR" || WORK PROPERLY?*/
-	if(temp.getNext() == null || temp.getNext() == null && temp.getData().getDueBack().before(s.dueBack)){
+	if(temp.getNext() == null && temp.getData().getDueBack().before(s.dueBack)){
 		temp.setNext(new DNode(s, null, temp));
 		return;
-
-
 	}
 	/** Case4: s goes in middle of list*/
 	temp = new DNode(s, temp, temp.getPrev());
@@ -153,6 +152,7 @@ if(s instanceof Console){
 	 *
 	 */
 	// TODO: More code goes here.
+
 	public Rental remove(int index) {
 		/** Create temp pointer to move down list*/
 		DNode temp = top;
@@ -165,7 +165,7 @@ if(s instanceof Console){
 		}
 
 		/** Case 1: Index out of bounds*/
-		if(index > size()){
+		if(index > size() - 1){
 			JOptionPane.showMessageDialog(null, "Index larger than list");
 			return null;
 		}
@@ -178,11 +178,11 @@ if(s instanceof Console){
 		}
 
 
-		/**Case 3: list exists*/
+		/**Case 3: list exists, delete top*/
 		if(index == 0){
 			tempData = top.getData();
 			top = top.getNext();
-			top.getNext().setPrev(null);
+			top.setPrev(null);
 			return tempData;
 		}
 		//move pointer to correct element
@@ -246,5 +246,8 @@ if(s instanceof Console){
 				", size=" + size() +
 				'}';
 	}
+
+
+
 
 }
