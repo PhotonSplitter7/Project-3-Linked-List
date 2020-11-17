@@ -71,29 +71,79 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 			return;
 		}
 
-		/** Case1: s is a Game, and s goes on top- list exists (older dates on bottom)*/
-		if (s instanceof Game && top.getData().getDueBack().after(s.dueBack)) {
-
-			//1 element list
-			if (size() == 1) {
-				top = new DNode(s, top, null);
-				return;
-			}
-
-			top = new DNode(s, top, null);
-			top.getNext().setPrev(top);
-			return;
-		}
-
-
-			/** Case 2: s doesnt go on top (older dates on bottom) */
-			while (temp.getNext() != null && temp.getData().getDueBack().before(s.dueBack)) {
-				temp = temp.getNext();
-			}
-			temp = new DNode(s, temp, temp.getPrev());
-			/**TODO add here*/
-			return;
+if(s instanceof Game) {
+	/** Case1: s is a Game, and s goes on top- list exists (older dates on bottom)*/
+	if (top.getData().getDueBack().after(s.dueBack)) {
+		top = new DNode(s, top, null);
+		return;
 	}
+
+
+	/** Case 2: s doesnt go on top, is game (older dates on bottom), List > 1 stop at consoles*/
+	while (temp.getNext() != null && temp.getData().getDueBack().before(s.dueBack) && !(temp.getData() instanceof Console)) {
+		temp = temp.getNext();
+	}
+
+	/**Case3: s goes to end of list WILL THE "OR" || WORK PROPERLY?*/
+	if(temp.getNext() == null || temp.getNext() == null && temp.getData().getDueBack().before(s.dueBack)){
+		temp.setNext(new DNode(s, null, temp));
+		return;
+
+
+	}
+	/** Case4: s goes in middle of list*/
+	temp = new DNode(s, temp, temp.getPrev());
+	temp.getPrev().setNext(temp);
+	temp.getNext().setPrev(temp);
+	return;
+}
+
+if(s instanceof Console){
+
+	/**Case5: s is console, node goes on top*/
+	if (top.getData().getDueBack().after(s.dueBack) && top.getData() instanceof Console) {
+		top = new DNode(s, top, null);
+		return;
+	}
+
+	/** Case6: s is console, doesnt go on top*/
+	/** bypass all game nodes*/
+	while(temp.getNext() != null && temp.getData() instanceof Game){
+		temp = temp.getNext();
+	}
+	/** once bypass game nodes, pass earlier due dates*/
+	while(temp.getNext() != null && temp.getData().getDueBack().before(s.dueBack)){
+		temp = temp.getNext();
+	}
+
+	/**Case7: s goes to end of list becouse other node is game*/
+	if(temp.getNext() == null && temp.getData() instanceof Game){
+		temp.setNext(new DNode(s, null, temp));
+		return;
+	}
+
+	/** Case 8: node isnt Game, but due date earlier, add to end of list*/
+	if(temp.getNext() == null && temp.getData().getDueBack().before(s.dueBack)){
+		temp.setNext(new DNode(s, null, temp));
+		return;
+	}
+
+	/** Case9: s goes in middle of list*/
+	temp = new DNode(s, temp, temp.getPrev());
+	temp.getPrev().setNext(temp);
+	temp.getNext().setPrev(temp);
+	return;
+
+
+
+}
+
+
+
+	}
+
+
+
 
 	/******************************************************************
 	 *Remove - deletes a selected node

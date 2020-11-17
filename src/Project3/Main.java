@@ -26,14 +26,11 @@ public class Main {
         Game game2 = new Game("Person2", g3, g2, null, "Halo",
                 new Console("Person2", g3, g2, null, ConsoleTypes.PlayStation4));
 
-        Llist.add(game1);
 
-      System.out.println(Llist.size());
-      Llist.remove(0);
-      System.out.println(Llist.size());
+
+        System.out.println(Llist.size());
         Llist.add(game1);
-        Llist.add(game1);
-        Llist.add(game1);
+        Llist.add(game2);
         System.out.println(Llist.size());
 
 
