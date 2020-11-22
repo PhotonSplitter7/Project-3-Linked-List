@@ -81,19 +81,23 @@ public class Main {
 
 
 
-        System.out.println(Llist.size());
-        Llist.add(game1);
-        System.out.println(Llist.size());
-        Llist.add(game2);//dies here
-        System.out.println(Llist.size());
-        Llist.add(game3);
-        System.out.println(Llist.size());
-        Llist.add(game4);
-        System.out.println(Llist.size());
+
+
         Llist.add(console1);
-        System.out.println(Llist.size());
+        Llist.add(console2);
+        Llist.add(console3);
+        Llist.add(console4);
+        Llist.add(console5);
+        Llist.add(game1);
+        Llist.add(game2);//dies here
+        Llist.add(game3);
+        Llist.add(game4);
+        System.out.println(Llist.size() + " = Length");
 
         Llist.display();
+
+
+
 
 
 

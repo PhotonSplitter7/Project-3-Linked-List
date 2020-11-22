@@ -66,14 +66,16 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 		DNode temp = top;
 
 		/** Case 0: no list*/
-		if (top == null) {
+		if (top == null ) {
 			top = new DNode(s, null, null);
 			return;
 		}
 
+
+
 if(s instanceof Game) {
-	/** Case1: s is a Game, and s goes on top- list exists (older dates on bottom)*/
-	if (top.getData().getDueBack().after(s.dueBack)) {
+	/** Case1: s is a Game, and s goes on top- list exists (older dates on bottom) or if console is at top of list*/
+	if (top.getData().getDueBack().after(s.dueBack) || top.getData() instanceof Console) {
 		top = new DNode(s, top, null);
 		top.getNext().setPrev(top);
 		return;
@@ -102,6 +104,7 @@ if(s instanceof Console){
 	/**Case5: s is console, node goes on top*/
 	if (top.getData().getDueBack().after(s.dueBack) && top.getData() instanceof Console) {
 		top = new DNode(s, top, null);
+		top.getNext().setPrev(top);// added to fix null param exception
 		return;
 	}
 
@@ -129,7 +132,7 @@ if(s instanceof Console){
 
 	/** Case9: s goes in middle of list*/
 	temp = new DNode(s, temp, temp.getPrev());
-	temp.getPrev().setNext(temp);
+	temp.getPrev().setNext(temp);// issue here!
 	temp.getNext().setPrev(temp);
 	return;
 
