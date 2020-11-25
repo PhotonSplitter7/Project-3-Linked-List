@@ -42,7 +42,7 @@ public class ListModel extends AbstractTableModel {
         listOfRentals = new MyDoubleWithOutTailLinkedList();
         fileredListRentals = new MyDoubleWithOutTailLinkedList();
         /**TURNEDOFF*/
-        //        UpdateScreen();
+                UpdateScreen();
 
         createList();
     }
@@ -56,7 +56,7 @@ public class ListModel extends AbstractTableModel {
         switch (display) {
             case CurrentRentalStatus:
                 fileredListRentals.clear();
-                for (int i = 0; i < listOfRentals.size(); i++)
+                for (int i = 0; i < listOfRentals.size(); i++)//HERE IT BREAKS!!!!!!!!! PLACE BREAK POINT
                     if (listOfRentals.get(i).getActualDateReturned() == null)
                         fileredListRentals.add(listOfRentals.get(i));
                 break;
@@ -185,7 +185,7 @@ public class ListModel extends AbstractTableModel {
     public void add(Rental a) {
         listOfRentals.add(a);
         /**TURNEDOFF*/
-//        UpdateScreen();
+        UpdateScreen();
     }
 
     public Rental get(int i) {
@@ -276,16 +276,19 @@ public class ListModel extends AbstractTableModel {
             add(game1);
             add(game4);
             add(game5);
-//            add(game2);
-//            add(game3);
-//            add(game6);
-//            add(game7);
-//
-//            add(console1);
-//            add(console2);
-//            add(console5);
-//            add(console3);
-//            add(console4);
+            add(game2);
+            add(game3);
+            add(game6);
+            add(game7);
+            //TESTING ONLY
+            System.out.println(listOfRentals.size());
+
+
+            add(console1);
+            add(console2);
+            add(console5);
+            add(console3);
+            add(console4);
 
             // create a bunch of them.
             int count = 0;

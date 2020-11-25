@@ -83,15 +83,11 @@ public class Main {
 
 
 
-        Llist.add(console1);
-        Llist.add(console2);
-        Llist.add(console3);
-        Llist.add(console4);
-        Llist.add(console5);
         Llist.add(game1);
-        Llist.add(game2);//dies here
-        Llist.add(game3);
         Llist.add(game4);
+        Llist.add(game5);
+
+
         System.out.println(Llist.size() + " = Length");
 
         Llist.display();
