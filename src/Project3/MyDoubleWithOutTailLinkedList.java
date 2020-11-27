@@ -108,6 +108,20 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 			return;
 		}
 
+//		/** Case EXPERIMENTAL: add to top: equal dates, s.name lexigraphically shorter than or equal to top.name- both game*/
+//		if(s.getDueBack().equals(top.getData().dueBack) && s.nameOfRenter.compareTo(top.getData().nameOfRenter) > 0 && s instanceof Game && temp.getData() instanceof Game){
+//			top = new DNode(s, top, null);
+//			top.getNext().setPrev(top);
+//			return;
+//		}
+//
+//		/** Case EXPERIMENTAL: add to top: equal dates, s.name lexigraphically shorter than or equal to top.name- both console*/
+//		if(s.getDueBack().equals(top.getData().dueBack) && s.nameOfRenter.compareTo(top.getData().nameOfRenter) > 0 && s instanceof Console && temp.getData() instanceof Console){
+//			top = new DNode(s, top, null);
+//			top.getNext().setPrev(top);
+//			return;
+//		}
+
 		/*************add to end && list size == 1************/
 
 		/** Case 6: add to end: list size 1: top game, s console*/
@@ -143,7 +157,7 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 
 		/************************** While loop if s == Game**********************/
 		if(s instanceof Game){
-			while (temp.getNext() != null && s.getDueBack().before(temp.getData().dueBack) && temp.getData() instanceof Game){
+			while (temp.getNext() != null && s.getDueBack().after(temp.getData().dueBack) && temp.getData() instanceof Game){
 				temp = temp.getNext();
 			}
 		}
@@ -185,6 +199,20 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 			temp = new DNode(s, temp, temp.getPrev());
 			temp.getPrev().setNext(temp);
 			temp.getNext().setPrev(temp);
+			return;
+		}
+
+		/** Case EXPERIMENTAL: Add to middle: list longer than 1: dates equal, s name lexigraphically shorter than temp: both games*/
+		if(s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) > 0 && s instanceof Game && temp.getData() instanceof Game && temp.getNext() != null){
+			temp.setNext(new DNode(s, temp.getNext(), temp));
+			temp.getNext().getNext().setPrev(temp.getNext());
+			return;
+		}
+
+		/** Case EXPERIMENTAL: Add to middle: list longer than 1: dates equal, s name lexigraphically shorter than temp: both Consoles*/
+		if(s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) > 0 && s instanceof Console && temp.getData() instanceof Console && temp.getNext() != null){
+			temp.setNext(new DNode(s, temp.getNext(), temp));
+			temp.getNext().getNext().setPrev(temp.getNext());
 			return;
 		}
 

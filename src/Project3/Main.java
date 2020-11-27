@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Main {
@@ -83,12 +84,40 @@ public class Main {
         Console console4 = new Console("Person6", g4, g7, null, ConsoleTypes.SegaGenesisMini);
         Console console5 = new Console("Person1", g5, g4, g3, ConsoleTypes.XBoxOneS);
         Console consoleDiffName1 = new Console("ABC", g4, g6, null, ConsoleTypes.PlayStation4);
-        Console consoleDiffName2 = new Console("XYZ", g4, g6, null, ConsoleTypes.PlayStation4);
+        Console consoleDiffName2 = new Console("XYZxzxzxxxzxzxzxz", g4, g6, null, ConsoleTypes.PlayStation4);
 
 /****************************/
 
 
-//ISSUE, When adding same dates with different names linked list seems to simply cover over pervious node
+//ISSUE, When adding same dates with different names linked list seems to be missing a case. Simply doesnt add node S to list becouse condition doesnt exist where it would be added.
+
+
+        System.out.println(Llist.size() + " = Length");
+        Llist.add(console2);
+        System.out.println(Llist.size() + " = Length");
+        Llist.add(game1);
+        System.out.println(Llist.size() + " = Length");
+        Llist.add(console1);
+        System.out.println(Llist.size() + " = Length");
+        Llist.add(game2);
+        System.out.println(Llist.size() + " = Length");
+        Llist.add(console2);
+        System.out.println(Llist.size() + " = Length");
+        Llist.add(game1);
+        System.out.println(Llist.size() + " = Length");
+        Llist.add(console1);
+        System.out.println(Llist.size() + " = Length");
+        Llist.add(game2);
+        System.out.println(Llist.size() + " = Length");
+        Llist.add(console2);
+        System.out.println(Llist.size() + " = Length");
+        Llist.add(game1);
+        System.out.println(Llist.size() + " = Length");
+        Llist.add(console1);
+        System.out.println(Llist.size() + " = Length");
+        Llist.add(game2);
+        System.out.println(Llist.size() + " = Length");
+
 
         Llist.add(console1);
         System.out.println(Llist.size() + " = Length");
@@ -105,35 +134,35 @@ public class Main {
 
 
         Llist.add(game1);
-        System.out.println(Llist.size() + " = Length");
-        Llist.add(console1);
-        System.out.println(Llist.size() + " = Length");
-        Llist.add(game1);
-        System.out.println(Llist.size() + " = Length");
-        Llist.add(console3);
-        System.out.println(Llist.size() + " = Length");
-        Llist.add(game1);
-        System.out.println(Llist.size() + " = Length");
-        Llist.add(console3);
-        System.out.println(Llist.size() + " = Length");
-        Llist.add(game1);
-        System.out.println(Llist.size() + " = Length");
-        Llist.add(game1);
-        System.out.println(Llist.size() + " = Length");
-        Llist.add(game1);
-        System.out.println(Llist.size() + " = Length");
 
-        Llist.add(console1);
-        System.out.println(Llist.size() + " = Length");
-        Llist.add(console1);
-        System.out.println(Llist.size() + " = Length");
-        Llist.add(console3);
-        System.out.println(Llist.size() + " = Length");
-        Llist.add(game1);
-        System.out.println(Llist.size() + " = Length");
-        Llist.add(console3);
-        System.out.println(Llist.size() + " = Length");
-        Llist.add(game1);
+//        Llist.add(console1);
+//        System.out.println(Llist.size() + " = Length");
+//        Llist.add(game1);
+//        System.out.println(Llist.size() + " = Length");
+//        Llist.add(console3);
+//        System.out.println(Llist.size() + " = Length");
+//        Llist.add(game1);
+//        System.out.println(Llist.size() + " = Length");
+//        Llist.add(console3);
+//        System.out.println(Llist.size() + " = Length");
+//        Llist.add(game1);
+//        System.out.println(Llist.size() + " = Length");
+//        Llist.add(game1);
+//        System.out.println(Llist.size() + " = Length");
+//        Llist.add(game1);
+//        System.out.println(Llist.size() + " = Length");
+
+//        Llist.add(console1);
+//        System.out.println(Llist.size() + " = Length");
+//        Llist.add(console1);
+//        System.out.println(Llist.size() + " = Length");
+//        Llist.add(console3);
+//        System.out.println(Llist.size() + " = Length");
+//        Llist.add(game1);
+//        System.out.println(Llist.size() + " = Length");
+//        Llist.add(console3);
+//        System.out.println(Llist.size() + " = Length");
+//        Llist.add(game1);
 
 
 
