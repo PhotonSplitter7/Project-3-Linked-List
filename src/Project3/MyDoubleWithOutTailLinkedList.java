@@ -80,33 +80,49 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 			return;
 		}
 
-		/** Case 2: add to top: s date before top date*/
-		if(s.getDueBack().before(top.getData().dueBack)){
+		/** Case 2: add to top: s date before top date, top is also game*/
+		if(s.getDueBack().before(top.getData().dueBack) && s instanceof Game && top.getData() instanceof Game ){
 			top = new DNode(s, top, null);
 			top.getNext().setPrev(top);
 			return;
 		}
 
-		/** Case 3: add to top: equal dates, s.name lexigraphically shorter than or equal to top.name*/
-		if(s.getDueBack().equals(top.getData().dueBack) && s.nameOfRenter.compareTo(top.getData().nameOfRenter) <= 0){
+		/** Case 3: add to top: s date before top date, top and s are both consoles*/
+		if(s.getDueBack().before(top.getData().dueBack) && s instanceof Console && top.getData() instanceof Console){
 			top = new DNode(s, top, null);
 			top.getNext().setPrev(top);
 			return;
 		}
 
-		/** Case 4: add to end: list size 1: top game, s console*/
+		/** Case 4: add to top: equal dates, s.name lexigraphically shorter than or equal to top.name- both game*/
+		if(s.getDueBack().equals(top.getData().dueBack) && s.nameOfRenter.compareTo(top.getData().nameOfRenter) <= 0 && s instanceof Game && temp.getData() instanceof Game){
+			top = new DNode(s, top, null);
+			top.getNext().setPrev(top);
+			return;
+		}
+
+		/** Case 5: add to top: equal dates, s.name lexigraphically shorter than or equal to top.name- both console*/
+		if(s.getDueBack().equals(top.getData().dueBack) && s.nameOfRenter.compareTo(top.getData().nameOfRenter) <= 0 && s instanceof Console && temp.getData() instanceof Console){
+			top = new DNode(s, top, null);
+			top.getNext().setPrev(top);
+			return;
+		}
+
+		/*************add to end && list size == 1************/
+
+		/** Case 6: add to end: list size 1: top game, s console*/
 		if(s instanceof Console && top.getData() instanceof Game && size() == 1){
 			top.setNext(new DNode(s, null,top));
 			return;
 		}
 
-		/** Case 5: add to end: list size 1: s date after top.date */
+		/** Case 7: add to end: list size 1: s date after top.date */
 		if(s.getDueBack().after(top.getData().dueBack) && size() == 1){
 			top.setNext(new DNode(s, null,top));
 			return;
 		}
 
-		/** Case 6: add to end: size 1: equal dates, name lexigraphically longer than top.name*/
+		/** Case 8: add to end: size 1: equal dates, name lexigraphically longer than top.name*/
 		if(s.getDueBack().equals(top.getData().dueBack) && size() == 1 && s.nameOfRenter.compareTo(top.getData().nameOfRenter) > 0){
 			top.setNext(new DNode(s, null,top));
 			return;
@@ -130,10 +146,9 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 			while (temp.getNext() != null && s.getDueBack().before(temp.getData().dueBack) && temp.getData() instanceof Game){
 				temp = temp.getNext();
 			}
-
 		}
 
-		/**Case 7: Add to middle: list longer than 1: temp is console and s is game*/
+		/**Case 9: Add to middle- add above temp: list longer than 1: temp is console and s is game*/
 		if(temp.getData() instanceof Console && s instanceof Game){
 			temp = new DNode(s, temp, temp.getPrev());
 			temp.getPrev().setNext(temp);
@@ -141,48 +156,67 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 			return;
 		}
 
-		/** Case 8: Add to middle: list longer than 1: s.date earlier than temp.date: s date  */
-		if(s.getDueBack().before(temp.getData().dueBack)){
+		/** Case 10: Add to middle- add above temp: list longer than 1: s.date earlier than temp.date: both rentals game */
+		if(s.getDueBack().before(temp.getData().dueBack) && s instanceof Game && temp.getData() instanceof Game){
 			temp = new DNode(s, temp, temp.getPrev());
 			temp.getPrev().setNext(temp);
 			temp.getNext().setPrev(temp);
 			return;
 		}
 
-		/** Case 9: Add to middle: list longer than 1: dates equal, s name lexigraphically shorter than temp*/
-		if(s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) <= 0){
+		/** Case 11: Add to middle- add above temp: list longer than 1: s.date earlier than temp.date: both rentals Console */
+		if(s.getDueBack().before(temp.getData().dueBack) && s instanceof Console && temp.getData() instanceof Console){
 			temp = new DNode(s, temp, temp.getPrev());
 			temp.getPrev().setNext(temp);
 			temp.getNext().setPrev(temp);
 			return;
 		}
 
-		/**Case 10: add to end IF temp last node: list games, s Console*/
+		/** Case 12: Add to middle: list longer than 1: dates equal, s name lexigraphically shorter than temp: both games*/
+		if(s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) <= 0 && s instanceof Game && temp.getData() instanceof Game){
+			temp = new DNode(s, temp, temp.getPrev());
+			temp.getPrev().setNext(temp);
+			temp.getNext().setPrev(temp);
+			return;
+		}
+
+		/** Case 13: Add to middle: list longer than 1: dates equal, s name lexigraphically shorter than temp: both Consoles*/
+		if(s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) <= 0 && s instanceof Console && temp.getData() instanceof Console){
+			temp = new DNode(s, temp, temp.getPrev());
+			temp.getPrev().setNext(temp);
+			temp.getNext().setPrev(temp);
+			return;
+		}
+
+		/**Case 14: add to end IF temp last node: list games, s Console*/
 		if(temp.getNext() == null && s instanceof Console && temp.getData() instanceof Game){
 			temp.setNext(new DNode(s,null,temp));
 			return;
 		}
 
-		/** Case 11: add to end IF temp last node: s date after temp date*/
-		if(temp.getNext() == null && s.getDueBack().after(temp.getData().dueBack)){
+		/** Case 15: add to end IF temp last node: s date after temp date: both games*/
+		if(temp.getNext() == null && s.getDueBack().after(temp.getData().dueBack) && s instanceof Game && temp.getData() instanceof Game){
 			temp.setNext(new DNode(s,null,temp));
 			return;
 		}
 
-		/** Case 12: add to end IF temp last node: s and temp dates equal: s name lexigraphically longer*/
-		if(temp.getNext() == null && s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) > 0){
+		/** Case 16: add to end IF temp last node: s date after temp date: both consoles*/
+		if(temp.getNext() == null && s.getDueBack().after(temp.getData().dueBack) && s instanceof Console && temp.getData() instanceof Console){
 			temp.setNext(new DNode(s,null,temp));
 			return;
 		}
 
+		/** Case 17: add to end IF temp last node: s and temp dates equal: s name lexigraphically longer: both games*/
+		if(temp.getNext() == null && s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) > 0 && s instanceof Game && temp.getData() instanceof Game){
+			temp.setNext(new DNode(s,null,temp));
+			return;
+		}
 
-
-
-
-
-
-
-
+		/** Case 18: add to end IF temp last node: s and temp dates equal: s name lexigraphically longer: both consoles*/
+		if(temp.getNext() == null && s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) > 0 && s instanceof Console && temp.getData() instanceof Console){
+			temp.setNext(new DNode(s,null,temp));
+			return;
+		}
 
 
 
