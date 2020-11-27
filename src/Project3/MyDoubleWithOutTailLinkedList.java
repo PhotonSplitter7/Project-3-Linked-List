@@ -251,13 +251,13 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 		}
 
 		/** Case 19: add to end IF temp last node: s and temp dates equal: s name lexigraphically longer: both games*/
-		if(temp.getNext() == null && s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) > 0 && s instanceof Game && temp.getData() instanceof Game){
+		if(temp.getNext() == null && s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) >= 0 && s instanceof Game && temp.getData() instanceof Game){
 			temp.setNext(new DNode(s,null,temp));
 			return;
 		}
 
 		/** Case 20: add to end IF temp last node: s and temp dates equal: s name lexigraphically longer: both consoles*/
-		if(temp.getNext() == null && s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) > 0 && s instanceof Console && temp.getData() instanceof Console){
+		if(temp.getNext() == null && s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) >= 0 && s instanceof Console && temp.getData() instanceof Console){
 			temp.setNext(new DNode(s,null,temp));
 			return;
 		}
