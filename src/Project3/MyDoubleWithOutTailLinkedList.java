@@ -4,6 +4,15 @@ import javax.swing.*;
 import java.io.Serializable;
 import java.util.Random;
 
+
+/*********************************************
+ * MyDoubleWithoutTailLinkedList: this class handles the creation and
+ * maintenance of a double tailed linked list.
+ * adds rentals, clears rentals, and measures size of list.
+ * @author Dan George & Kirk Lemaire
+ * @version 11/29/2020
+ *********************************************/
+
 public class MyDoubleWithOutTailLinkedList implements Serializable {
 
 	private DNode top;
@@ -12,7 +21,7 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 		top = null;
 	}
 
-	// This method has been provided and you are not permitted to modify
+	/** This method has been provided and you are not permitted to modify*/
 	public int size() {
 		if (top == null)
 			return 0;
@@ -53,26 +62,21 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 	}
 
 	/******************************************************************
-	 *
-	 * Your task is to complete this method.  Have the following
-	 * ordering:
-	 * Sort by Games first (ordered by dueDate), then by Consoles second
-	 * (ordered by dueDate).
-	 * Once you have Task 2 completed, sort by the renter's name if the
-	 * dueDates are equal to complete Task 3.
-	 *
-	 */
+	 *	Add method: adds a rental to linked list, sorting by games first,
+	 *	consoles second, sorting by due date
+	 * finally sorting by name if due dates same.
+	 * @param s a rental to be added
+	 **********************************************************************/
 	public void add(Rental s) {
 		DNode temp = top;
 
-		/** Case 0: no list*/
+		/** Case 0: no list exists*/
 		if (top == null ) {
 			top = new DNode(s, null, null);
 			return;
 		}
 
 		/**ADD TO TOP*/
-
 		/** Case 1: add to top: s is game top is console*/
 		if(s instanceof  Game && top.getData() instanceof Console){
 			top = new DNode(s, top, null);
@@ -94,33 +98,19 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 			return;
 		}
 
-		/** Case 4: add to top: equal dates, s.name lexigraphically shorter than or equal to top.name- both game*/
+		/** Case 4: add to top: equal dates, s.name lexicographically shorter than or equal to top.name- both game*/
 		if(s.getDueBack().equals(top.getData().dueBack) && s.nameOfRenter.compareTo(top.getData().nameOfRenter) <= 0 && s instanceof Game && temp.getData() instanceof Game){
 			top = new DNode(s, top, null);
 			top.getNext().setPrev(top);
 			return;
 		}
 
-		/** Case 5: add to top: equal dates, s.name lexigraphically shorter than or equal to top.name- both console*/
+		/** Case 5: add to top: equal dates, s.name lexicographically shorter than or equal to top.name- both console*/
 		if(s.getDueBack().equals(top.getData().dueBack) && s.nameOfRenter.compareTo(top.getData().nameOfRenter) <= 0 && s instanceof Console && temp.getData() instanceof Console){
 			top = new DNode(s, top, null);
 			top.getNext().setPrev(top);
 			return;
 		}
-//USELESS?
-//		/** Case EXPERIMENTAL: add to top: equal dates, s.name lexigraphically shorter than or equal to top.name- both game*/
-//		if(s.getDueBack().equals(top.getData().dueBack) && s.nameOfRenter.compareTo(top.getData().nameOfRenter) > 0 && s instanceof Game && temp.getData() instanceof Game){
-//			top = new DNode(s, top, null);
-//			top.getNext().setPrev(top);
-//			return;
-//		}
-//
-//		/** Case EXPERIMENTAL: add to top: equal dates, s.name lexigraphically shorter than or equal to top.name- both console*/
-//		if(s.getDueBack().equals(top.getData().dueBack) && s.nameOfRenter.compareTo(top.getData().nameOfRenter) > 0 && s instanceof Console && temp.getData() instanceof Console){
-//			top = new DNode(s, top, null);
-//			top.getNext().setPrev(top);
-//			return;
-//		}
 
 		/*************add to end && list size == 1************/
 
@@ -136,7 +126,7 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 			return;
 		}
 
-		/** Case 8: add to end: size 1: equal dates, name lexigraphically longer than top.name*/
+		/** Case 8: add to end: size 1: equal dates, name lexicographically longer than top.name*/
 		if(s.getDueBack().equals(top.getData().dueBack) && size() == 1 && s.nameOfRenter.compareTo(top.getData().nameOfRenter) > 0){
 			top.setNext(new DNode(s, null,top));
 			return;
@@ -144,12 +134,13 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 
 		/******************** ADD TO MIDDLE (list longer than 1) && add to end (list longer than 1)*************************/
 
-
 		/** While loop if s == Console first passes all consoles, then passes all dates before s*/
 		if(s instanceof Console && temp.getNext() != null){
+			/** move temp past games until end*/
 			while (temp.getData() instanceof Game && temp.getNext() != null){
 				temp = temp.getNext();
 			}
+			/** if consoles available in list, check them for earlier due date*/
 			while(temp.getNext() != null && s.getDueBack().after(temp.getData().dueBack)){
 				temp = temp.getNext();
 			}
@@ -157,6 +148,7 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 
 		/************************** While loop if s == Game**********************/
 		if(s instanceof Game){
+			/** move temp past games with earier due date till end*/
 			while (temp.getNext() != null && s.getDueBack().after(temp.getData().dueBack) && temp.getData() instanceof Game){
 				temp = temp.getNext();
 			}
@@ -186,7 +178,7 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 			return;
 		}
 
-		/** Case 12: Add to middle: list longer than 1: dates equal, s name lexigraphically shorter than temp: both games*/
+		/** Case 12: Add to middle: list longer than 1: dates equal, s name lexicographically shorter than temp: both games*/
 		if(s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) <= 0 && s instanceof Game && temp.getData() instanceof Game){
 			temp = new DNode(s, temp, temp.getPrev());
 			temp.getPrev().setNext(temp);
@@ -194,7 +186,7 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 			return;
 		}
 
-		/** Case 13: Add to middle: list longer than 1: dates equal, s name lexigraphically shorter than temp: both Consoles*/
+		/** Case 13: Add to middle: list longer than 1: dates equal, s name lexicographically shorter than temp: both Consoles*/
 		if(s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) <= 0 && s instanceof Console && temp.getData() instanceof Console){
 			temp = new DNode(s, temp, temp.getPrev());
 			temp.getPrev().setNext(temp);
@@ -202,34 +194,35 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 			return;
 		}
 
-		/** Case 14: Add to middle: list longer than 1: dates equal, s name lexigraphically shorter than temp: both games THIS NEEDS TO ORDER NAMES CORRECTLY RIGHT HERE*/
-		if(s.getDueBack().equals(temp.getData().dueBack) && s instanceof Game && temp.getData() instanceof Game){
-			while(temp.getNext() != null && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) > 0 && s.getDueBack().equals(temp.getData().dueBack) && s instanceof Game && temp.getData() instanceof Game){
+		/** Case 14: Add to middle: list longer than 1: dates equal, s name lexicographically shorter than temp: both games
+		 *  sort by name*/
+		if (s.getDueBack().equals(temp.getData().dueBack) && s instanceof Game && temp.getData() instanceof Game) {
+			while (temp.getNext() != null && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) > 0 && s.getDueBack().equals(temp.getData().dueBack) && s instanceof Game && temp.getData() instanceof Game) {
 				temp = temp.getNext();
 			}
-			if(temp.getNext() != null){
+			/** if not at end of list: add before temp*/
+			if (temp.getNext() != null) {
 				temp = new DNode(s, temp, temp.getPrev());
 				temp.getPrev().setNext(temp);
 				temp.getNext().setPrev(temp);
 				return;
 			}
-
-
-			/**If at end of list, if temp.getNext == null, skip to line 260*/
+			/**If at end of list, if temp.getNext == null, skip to line 260 and add to list there*/
 		}
 
-		/** Case 15: Add to middle: list longer than 1: dates equal, s name lexigraphically shorter than temp: both Consoles*/
+		/** Case 15: Add to middle: list longer than 1: dates equal, s name lexicographically shorter than temp: both Consoles*/
 		if(s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) > 0 && s instanceof Console && temp.getData() instanceof Console){
 			while(temp.getNext() != null && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) > 0 && s.getDueBack().equals(temp.getData().dueBack) && s instanceof Console && temp.getData() instanceof Console){
 				temp = temp.getNext();
 			}
+			/** if not at end of list: add before temp*/
 			if(temp.getNext() != null){
 				temp = new DNode(s, temp, temp.getPrev());
 				temp.getPrev().setNext(temp);
 				temp.getNext().setPrev(temp);
 				return;
 			}
-			/**If at end of list, if temp.getNext == null, skip to line 267*/
+			/**If at end of list, if temp.getNext == null, skip to line 267 and add to list there*/
 		}
 
 		/**Case 16: add to end IF temp last node: list games, s Console*/
@@ -250,24 +243,17 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 			return;
 		}
 
-		/** Case 19: add to end IF temp last node: s and temp dates equal: s name lexigraphically longer: both games*/
+		/** Case 19: add to end IF temp last node: s and temp dates equal: s name lexicographically longer: both games*/
 		if(temp.getNext() == null && s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) >= 0 && s instanceof Game && temp.getData() instanceof Game){
 			temp.setNext(new DNode(s,null,temp));
 			return;
 		}
 
-		/** Case 20: add to end IF temp last node: s and temp dates equal: s name lexigraphically longer: both consoles*/
+		/** Case 20: add to end IF temp last node: s and temp dates equal: s name lexicographically longer: both consoles*/
 		if(temp.getNext() == null && s.getDueBack().equals(temp.getData().dueBack) && s.nameOfRenter.compareTo(temp.getData().nameOfRenter) >= 0 && s instanceof Console && temp.getData() instanceof Console){
 			temp.setNext(new DNode(s,null,temp));
 			return;
 		}
-
-
-
-
-
-
-
 
 	}
 
@@ -276,12 +262,10 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 
 	/******************************************************************
 	 *Remove - deletes a selected node
-	 *
 	 * @param index - node number to delete
 	 * @return tempData - rental that was deleted
-	 *
-	 */
-	// TODO: More code goes here.
+	 ******************************************************************/
+
 
 	public Rental remove(int index) {
 		/** Create temp pointer to move down list*/
@@ -315,19 +299,19 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 			top.setPrev(null);
 			return tempData;
 		}
-		//move pointer to correct element
+		/**move pointer to correct element*/
 		int i = 0;
 		while(i < index){
 			temp = temp.getNext();
 			i++;
 		}
-		//if last element chosen, delete
+		/**if last element chosen, delete*/
 		if(index == size()-1){
 			tempData = temp.getData();
 			temp.getPrev().setNext(null);
 			return tempData;
 		}
-		//if element in between first and last delete
+		/** if element in between first and last delete*/
 		tempData = temp.getData();
 		temp.getPrev().setNext(temp.getNext());
 		temp.getNext().setPrev(temp.getPrev());
@@ -335,11 +319,12 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 	}
 
 	/******************************************************************
-	 *
-	 * Your task is to complete this method.
-	 */
+	 * get: returns rental from linked list given its index
+	 * @param index an int representing index of rental
+	 * @return Rental from linked list
+	 ******************************************************************/
 	public Rental get(int index) {
-		// TODO: More code goes here.
+
 
 		/** Case 0: no list*/
 		if (top == null)
@@ -349,8 +334,10 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 		if(size() == 1 || index == 0)
 			return top.getData();
 		/** Case 2: index out of bounds*/
-		if(index > size())
+		if(index > size()) {
+			JOptionPane.showMessageDialog(null, "Index larger than list");
 			return null;
+		}
 
 		/** Case 3: list more than 1 long*/
 		DNode temp = top;
@@ -362,6 +349,9 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 
 	}
 
+	/********************************
+	 * display: displays linked list
+	 *******************************/
 	public void display() {
 		DNode temp = top;
 		while (temp != null) {
@@ -370,6 +360,10 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 		}
 	}
 
+	/******************************************************
+	 * toString: returns a string represenging linked list
+	 * @return String: representing linked list information
+	 * ****************************************************/
 	public String toString() {
 		return "DLL {" +
 				"top=" + top +
