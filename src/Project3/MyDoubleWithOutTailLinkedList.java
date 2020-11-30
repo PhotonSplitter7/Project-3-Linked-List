@@ -334,15 +334,17 @@ public class MyDoubleWithOutTailLinkedList implements Serializable {
 		if(size() == 1 || index == 0)
 			return top.getData();
 		/** Case 2: index out of bounds*/
-		if(index > size()) {
+		if(index >= size()) {
 			JOptionPane.showMessageDialog(null, "Index larger than list");
 			return null;
 		}
 
 		/** Case 3: list more than 1 long*/
 		DNode temp = top;
-		for(int i = 1; i < index; i++){
+		int i = 0;
+		while(i < index){
 			temp = temp.getNext();
+			i++;
 		}
 		return temp.getData();
 

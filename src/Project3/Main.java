@@ -54,7 +54,7 @@ public class Main {
         Game game1 = new Game("Person1", g3, g2, null, "title1",
                 new Console("Person1", g3, g2, null, ConsoleTypes.PlayStation4));
         Game game2 = new Game("Person1", g3, g1, null, "title2",
-                new Console("Person1", g3, g1, null, ConsoleTypes.PlayStation4));
+                new Console("BADGUY", g3, g1, null, ConsoleTypes.PlayStation4));
         Game game3 = new Game("Person1", g5, g3, null, "title2",
                 new Console("Person1", g5, g3, null, ConsoleTypes.SegaGenesisMini));
         Game game4 = new Game("Person7", g4, g8, null, "title2", null);
@@ -306,6 +306,18 @@ public class Main {
         System.out.println(Llist.size() + " = Length");
 
         Llist.display();
+
+        System.out.println("***********************************************************************");
+
+        Llist.remove(4);
+        Llist.display();
+        System.out.println("***********************************************************************");
+        Llist.remove(1);
+        Llist.display();
+        System.out.println("***********************************************************************");
+        Llist.remove(Llist.size());
+        Llist.display();
+        System.out.println("***********************************************************************");
 
 
 

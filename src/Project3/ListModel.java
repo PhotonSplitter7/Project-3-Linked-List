@@ -272,23 +272,20 @@ public class ListModel extends AbstractTableModel {
                     new Console("Person6", g4, g7, null, ConsoleTypes.NintendoSwich));
             Game game7 = new Game("Person5", g4, g8, null, "title1",
                     new Console("Person5", g4, g8, null, ConsoleTypes.NintendoSwich));
-/**TURNEDOFF*/
-            add(game1);
-            add(game4);
-            add(game5);
-            add(game2);
-            add(game3);
-            add(game6);
-            add(game7);
-            //TESTING ONLY
-            System.out.println(listOfRentals.size());
-
-
-            add(console1);
-            add(console2);
-            add(console5);
-            add(console3);
-            add(console4);
+//
+//            add(game1);
+//            add(game4);
+//            add(game5);
+//            add(game2);
+//            add(game3);
+//            add(game6);
+//            add(game7);
+//
+//            add(console1);
+//            add(console2);
+//            add(console5);
+//            add(console3);
+//            add(console4);
 
             // create a bunch of them.
             int count = 0;
